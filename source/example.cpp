@@ -1,4 +1,9 @@
 #include <fensterchen.hpp>
+#include <color.hpp>
+#include <point2d.hpp>
+#include <circle.hpp>
+#include <rectangle.hpp>
+
 
 int main(int argc, char* argv[])
 {
@@ -9,28 +14,25 @@ int main(int argc, char* argv[])
       win.stop();
     }
 
-    auto t = win.getTime();
-    float x1(0.5 + 0.5 * std::sin(t));
-    float y1(0.5 + 0.5 * std::cos(t));
+    Point2d punkt{0.2, 0.2};
+    Point2d punkt2{0.4, 0.4};
+    Point2d punkt3{0.2, 0.4};
+    Point2d punkt4{0.3, 0.6};
+    Color gruen{0.0, 1.0, 0.0};
+    Color gelb{1.0, 1.0, 0.0};
 
-    float x2(0.5 + 0.5 * std::sin(2.0*t));
-    float y2(0.5 + 0.5 * std::cos(2.0*t));
+    Rectangle eck{punkt, 0.1, 0.1, gruen};
+    eck.draw(win);
+    
+    Circle kreis{punkt2, 0.01, gruen};
+    kreis.draw(win);
 
-    float x3(0.5 + 0.5 * std::sin(t-10.f));
-    float y3(0.5 + 0.5 * std::cos(t-10.f));
+    Rectangle eck2{punkt3, 0.2, 0.3, gruen};
+    eck2.draw(win, gelb);
 
-    win.drawPoint(x1, y1, 1.0, 0.0, 0.0);
-    win.drawPoint(x2, y2, 0.0, 1.0, 0.0);
-    win.drawPoint(x3, y3, 0.0, 0.0, 1.0);
+    Circle kreis2(punkt4, 0.1, gruen);
+    kreis2.draw(win, gelb);
 
-    auto m = win.mousePosition();
-    win.drawLine(0.1f, 0.1f, 0.8f,0.1f, 1.0,0.0,0.0);
-
-    win.drawLine(0.0f, m.y, 0.01f, m.y, 0.0, 0.0, 0.0);
-    win.drawLine(0.99f, m.y,1.0f, m.y, 0.0, 0.0, 0.0);
-
-    win.drawLine(m.x, 0.0f, m.x, 0.01f, 0.0, 0.0, 0.0);
-    win.drawLine(m.x, 0.99f,m.x, 1.0f, 0.0, 0.0, 0.0);
 
     win.update();
   }
